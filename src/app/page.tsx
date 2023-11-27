@@ -27,7 +27,7 @@ export default function Home() {
   };
 
   const excluirArquivoevento = (e:any) => {
-    console.log(nomeArquivoExlcuir)
+ 
     e.preventDefault();
     excluirArquivo(nomeArquivoExlcuir);
   };
@@ -36,12 +36,27 @@ export default function Home() {
     const userInput = prompt('Digite a quantidade de espaços que deseja: ') || "100";
     try{
       let numero = parseInt(userInput, 10);
-      setListaDisco(new Array(numero).fill(""))
+      if(numero >= 10000 || numero <= 0){
+        toast.error(`O tamanho deve ser entre 1 a 10000`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+      else{
+        setListaDisco(new Array(numero).fill(""))
+      }
+      
     }
     catch(e){
       toast.error(`${e}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -55,10 +70,10 @@ export default function Home() {
   const excluirArquivo = (nomeArquivo:string) => {
  
     if (!Object.values(arquivos).includes(nomeArquivo)) {
-      console.log(`Erro: O arquivo ${nomeArquivo} não foi encontrado.`);
-      toast.error(`Erro: O arquivo ${nomeArquivo} não foi encontrado.`, {
+ 
+      toast.error(`O arquivo ${nomeArquivo} não foi encontrado.`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -76,15 +91,26 @@ export default function Home() {
     setArquivos((prevArquivos: any) => {
       const novoObjeto = { ...prevArquivos };
       delete novoObjeto[blocoArquivo];
+      toast.success(`O arquivo ${nomeArquivo} foi excluido`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        toastId:"dasd"
+      });
       return novoObjeto;
     });
 
-    console.log(`Arquivo ${nomeArquivo} excluído com sucesso.`);
+    
   };
 
   const exibirDisco = () => {
     console.clear()
-    console.log("Estado atual do disco:");
+  
     for (let i = 0; i < tamanho; i++) {
       if (listaDisco[i] === "") {
         lista.push(`[${i}] Livre \n`)
@@ -101,7 +127,7 @@ export default function Home() {
     if (nomeArquivo.trim() === "" || tamanhoArquivo <= 0) {
       toast.error(`Favor inserir valores válidos`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -114,7 +140,7 @@ export default function Home() {
     if (Object.values(arquivos).includes(nomeArquivo)) {
       toast.error(`Já existe um arquivo com o nome ${nomeArquivo}.`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -130,7 +156,7 @@ export default function Home() {
       ;
       toast.error("Não há espaço suficiente para salvar o arquivo.", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -149,11 +175,11 @@ export default function Home() {
 
     setListaDisco(novaListaDisco);
     setArquivos({ ...arquivos, [blocoArquivo]: nomeArquivo });
-    console.log(`Arquivo ${nomeArquivo} salvo com sucesso.`);
+
     
     toast.success(`Arquivo ${nomeArquivo} salvo com sucesso.`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
