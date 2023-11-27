@@ -1,5 +1,5 @@
 "use client"
-import { ArrowCircleLeft, House } from "@phosphor-icons/react";
+import { ArrowCircleLeft, GithubLogo, House } from "@phosphor-icons/react";
 import Contato from "../components/contato";
 import Link from "next/link";
 
@@ -42,7 +42,7 @@ export default function Sobre(){
               
               </div>
             </div>
-            <a target="_blank" className="mt-4 border-b-2 flex gap-3 border-black" href="https://github.com/Andrezz64/emuladisco">Repositório da aplicação</a>
+            <a target="_blank" className="mt-4 border-b-2 flex gap-1 border-black  items-center" href="https://github.com/Andrezz64/emuladisco"><GithubLogo size={32} color="#121212" />Repositório da aplicação</a>
         </main>
     )
 }
