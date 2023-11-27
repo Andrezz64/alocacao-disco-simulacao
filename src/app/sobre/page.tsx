@@ -43,7 +43,7 @@ export default function Sobre(){
               
               </div>
             </div>
-            <a target="_blank" className="mt-4 border-b-2 flex gap-3 border-black" href="https://github.com/Andrezz64/alocacao-disco-simulacao">Repositório da aplicação</a>
+            <a target="_blank" className="mt-4 border-b-2 flex gap-3 border-black" href="https://github.com/Andrezz64/emuladisco">Repositório da aplicação</a>
         </main>
     )
 }
