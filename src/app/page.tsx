@@ -5,7 +5,8 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { ArrowsClockwise } from "phosphor-react";
+import { ArrowsClockwise } from "@phosphor-icons/react";
+
 export default function Home() {
   const [nomeArquivo, setNomeArquivo] = useState("");
   const [tamanhoArquivo, setTamanhoArquivo] = useState(0);

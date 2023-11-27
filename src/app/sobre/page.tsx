@@ -1,8 +1,12 @@
+"use client"
+import { ArrowCircleLeft, House } from "@phosphor-icons/react";
 import Contato from "../components/contato";
+import Link from "next/link";
 
 export default function Sobre(){
     return(
         <main className="flex justify-center p-2 flex-col items-center">
+            <Link href={"/"} className="flex flex-col  justify-center items-center mb-5 md:hidden"><House size={32} color="#29bc55" /> Voltar para Home</Link>
             <h1 className="text-xl">Sobre o Projeto</h1>
             <h2 className="mt-10 mb-2 text-lg">Introdução</h2>
             <p className="flex-wrap max-w-[30rem] bg-[#121212] p-2 text-white rounded-md mb-5">Essa aplicação foi construída como projeto para a matéria de Sistemas operacionais do curso de Ciência da computação da Unifeso.</p>
@@ -10,21 +14,16 @@ export default function Sobre(){
             <p className="flex-wrap max-w-[30rem] bg-[#121212] p-2 text-white rounded-md">O objetivo da aplicação é simular a técnica de alocação em disco de forma contígua, mas ao invés de alocar em memória secundária, criamos uma lista com N posições para alocar e simular as operações do sistema operacional</p>
 
             <h2 className="mt-5 text-lg ">Time</h2>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3 justify-center items-center">
                 <Contato nome={"André Felipe Melo"} avatarUrl={"https://media.licdn.com/dms/image/C4E03AQGMl0qv1FfpKA/profile-displayphoto-shrink_800_800/0/1657507403336?e=1706745600&v=beta&t=aNAbCwss-TL6PG-z0ID70I7BCH8CH6zSGr_whvBdAe8"} matricula={"06003175"}></Contato>
                 <Contato nome={"Emanuel Cunha"} avatarUrl={"https://avatars.githubusercontent.com/u/103298591?v=4"} matricula={"06003365"}></Contato>
                 <Contato nome={"Eduardo cabral"} avatarUrl={"https://media-gig4-2.cdn.whatsapp.net/v/t61.24694-24/357198947_675207747811580_2790581872533190855_n.jpg?ccb=11-4&oh=01_AdTWqKp5RlGIyB3VqCaN999s0ZgJUKOickrXLYC6VvCulg&oe=6570E3AC&_nc_sid=e6ed6c&_nc_cat=100"} matricula={"06002546 "}></Contato>
                 <Contato nome={"Pedro Dias"} avatarUrl={"https://media-gig4-2.cdn.whatsapp.net/v/t61.24694-24/396428787_1290896781613360_5012691493868144800_n.jpg?ccb=11-4&oh=01_AdTbz5o13Oxcles3shbf3f6b7YtqAXbfXvs0XNiYm1Zjtw&oe=6570C14A&_nc_sid=e6ed6c&_nc_cat=109"} matricula={"06003504"}></Contato>
                 <Contato nome={"Raphael Bragança"} avatarUrl={"https://media.licdn.com/dms/image/D4E03AQE2j6N6kruonA/profile-displayphoto-shrink_200_200/0/1680010729885?e=1706745600&v=beta&t=l5GPqmPFfAZWiV2X34mn57wzqCtNgM7ahGqwJldrBIA"} matricula={"06003857"}></Contato>
                 <Contato nome={"Bernardo de Oliveira"} avatarUrl={"https://media.licdn.com/dms/image/D4D03AQGqIgzliRo64A/profile-displayphoto-shrink_200_200/0/1682570059129?e=1706745600&v=beta&t=zVVEK-Dqm93s55OKDjqzP2jBkAgpcjkYbWPTB1HkWlc"} matricula={"06004026"}></Contato>
-                {/* <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato>
-                <Contato nome={""} avatarUrl={""} matricula={""}></Contato> */}
+               <Contato nome={"Márcio Josué Branco"} avatarUrl={"https://media-gig4-2.cdn.whatsapp.net/v/t61.24694-24/370205757_654744483105919_1899572053470548821_n.jpg?ccb=11-4&oh=01_AdRpOUHCjHA6wadGqkIAAIz_yNMdHUzIXuHlQbxf4DPlTg&oe=65711771&_nc_sid=e6ed6c&_nc_cat=108"} matricula={"06003553"}></Contato>
+                <Contato nome={"Mohamad Azevedo"} avatarUrl={"https://media.licdn.com/dms/image/D4D03AQHaTrYbgJvXKA/profile-displayphoto-shrink_200_200/0/1685652673375?e=1706745600&v=beta&t=LJEyvni6WrLLo6KvbWvX6A_7E40-ShH_1H3zLtfkrL8"} matricula={"06003782"}></Contato>
+
             </div>
             <div className="mt-5 flex justify-start items-center flex-col">
             <h1 className="text-lg mb-5">Techs usadas</h1>
