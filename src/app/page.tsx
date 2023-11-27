@@ -1,18 +1,24 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { ArrowsClockwise } from "phosphor-react";
 export default function Home() {
   const [nomeArquivo, setNomeArquivo] = useState("");
   const [tamanhoArquivo, setTamanhoArquivo] = useState(0);
   const [nomeArquivoExlcuir, setNomeArquivoExlcuir] = useState("");
-
-  const [listaDisco, setListaDisco] = useState(new Array(100).fill(""));
+  let lista:Array<string> = []
+  const [maxPositions, setMaxPositions]:any = useState(100)
+  const [listaState, setListaState]:any = useState([])
+  const [listaDisco, setListaDisco] = useState(new Array(maxPositions).fill(""));
   const tamanho = listaDisco.length;
   const [arquivos, setArquivos]: any = useState({});
+
+
+
 
   const salvarArquivoEvento = (e: any) => {
     e.preventDefault();
@@ -25,9 +31,29 @@ export default function Home() {
     excluirArquivo(nomeArquivoExlcuir);
   };
 
+  const editarCapacidade = () =>{
+    const userInput = prompt('Digite a quantidade de espaços que deseja: ') || "100";
+    try{
+      let numero = parseInt(userInput, 10);
+      setListaDisco(new Array(numero).fill(""))
+    }
+    catch(e){
+      toast.error(`${e}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }
+
   const excluirArquivo = (nomeArquivo:string) => {
  
-    if (arquivos.hasOwnProperty(nomeArquivo)) {
+    if (!Object.values(arquivos).includes(nomeArquivo)) {
       console.log(`Erro: O arquivo ${nomeArquivo} não foi encontrado.`);
       toast.error(`Erro: O arquivo ${nomeArquivo} não foi encontrado.`, {
         position: "top-right",
@@ -60,11 +86,14 @@ export default function Home() {
     console.log("Estado atual do disco:");
     for (let i = 0; i < tamanho; i++) {
       if (listaDisco[i] === "") {
-        console.log(`[${i}] Livre`);
+        lista.push(`[${i}] Livre \n`)
+       
       } else {
-        console.log(`[${i}] ${arquivos[listaDisco[i]]}`);
+        lista.push(`[${i}] ${arquivos[listaDisco[i]]} \n`)
+       
       }
     }
+    setListaState(lista)
   };
 
   const salvarArquivo = (nomeArquivo: any, tamanhoArquivo: number) => {
@@ -81,8 +110,8 @@ export default function Home() {
       });
       return;
     }
-    if (arquivos.hasOwnProperty(nomeArquivo)) {
-      toast.error(`Erro: Já existe um arquivo com o nome ${nomeArquivo}.`, {
+    if (Object.values(arquivos).includes(nomeArquivo)) {
+      toast.error(`Já existe um arquivo com o nome ${nomeArquivo}.`, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -98,7 +127,7 @@ export default function Home() {
     const posicaoInicial = encontrarEspacoLivre(tamanhoArquivo);
     if (posicaoInicial === null) {
       ;
-      toast.error("Erro: Não há espaço suficiente para salvar o arquivo.", {
+      toast.error("Não há espaço suficiente para salvar o arquivo.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -120,6 +149,7 @@ export default function Home() {
     setListaDisco(novaListaDisco);
     setArquivos({ ...arquivos, [blocoArquivo]: nomeArquivo });
     console.log(`Arquivo ${nomeArquivo} salvo com sucesso.`);
+    
     toast.success(`Arquivo ${nomeArquivo} salvo com sucesso.`, {
       position: "top-right",
       autoClose: 5000,
@@ -145,10 +175,14 @@ export default function Home() {
 
   return (
     <main className="p-5 flex flex-col justify-center items-center gap-2">
-      <div className="mb-[5rem]">
-        Seu disco atual possui <strong>{tamanho} </strong>
-        posições
+      <div className="mb-[2rem]">
+        Seu disco atual possui <strong>{tamanho}</strong>
+       <span> posições</span>
       </div>
+      <div className="flex flex-wrap justify-center items-center">
+      <button  onClick={editarCapacidade} className="bg-[#121212] text-white border-2 p-2 rounded-md min-w-[10rem] hover:bg-transparent hover:border-[#121212] hover:text-[#121212] duration-200">
+           Editar capacidade
+          </button>
       <button
         onClick={exibirDisco}
         className="bg-[#121212] text-white border-2 p-2 min-w-[10rem]  rounded-md hover:bg-transparent hover:border-[#121212] hover:text-[#121212] duration-200"
@@ -217,7 +251,16 @@ export default function Home() {
           </div>
         </div>
       </Popup>
-
+      </div>
+     <h1 className="text-lg mt-5">Mapeamento de posições</h1>
+     <div className="mt-5 border-2 rounded-lg border-black p-3 flex justify-center items-center  gap-4 flex-wrap">
+     <button onClick={exibirDisco} className="bg-[#121212] text-white border-2 p-2 rounded-md hover:bg-transparent hover:border-[#121212] hover:text-[#121212] duration-200">   <ArrowsClockwise size={25} /></button>
+     {
+  listaState
+    ? listaState.map((element:any) => <div key={element} className="border-b-2">{element}</div>)
+    : <div>Carregando lista</div>
+}
+     </div>
       <ToastContainer
         position="top-right"
         autoClose={5000}
